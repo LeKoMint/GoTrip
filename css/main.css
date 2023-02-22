@@ -1,0 +1,1220 @@
+@import "./reset.css";
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap");
+
+:root {
+  --container-width: 1270px;
+  --container-padding: 15px;
+  --secondary: rgba(15, 31, 28, 0.5);
+  --orange: #ff7c4e;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  background-color: #f6f6f6;
+  color: #0f1f1c;
+}
+
+.none {
+  display: none !important;
+}
+
+.container {
+  max-width: var(--container-width);
+  padding: 0 var(--container-padding);
+  margin: 0 auto;
+}
+
+.container-right {
+  padding-left: calc(
+    (100% - var(--container-width)) / 2 + var(--container-padding)
+  );
+}
+
+.block {
+  height: 456px;
+  background-color: blue;
+}
+
+/* Header */
+
+.header {
+  overflow: hidden;
+  position: relative;
+  min-height: 940px;
+  background: linear-gradient(132.05deg, #428e5f -17.38%, #112120 78.4%),
+    #204434;
+  padding-top: 44px;
+  color: #ffffff; /*весь текст в header - білий */
+}
+
+/* Всі посилання в header - білі */
+.header a {
+  color: #ffffff;
+}
+
+.header::after {
+  /*подвійна двокрапка вказує на псевдоелемент after*/
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 96px;
+
+  background-image: url("./../img/header/header-bottom.svg");
+  background-size: 100%;
+}
+
+.header_top {
+  margin-bottom: 86px;
+}
+
+.header_row {
+  display: flex; /*виставляємо контент в лінію (резинову)*/
+}
+
+.header_content {
+  position: relative; /*задаємо цю картинку як дочірню, щоб можна було працювати з z-індексом, щоб підняти слой вище за img*/
+  z-index: 1; /*задаємо трішки вище за нуль*/
+  max-width: 592px;
+}
+
+.header_img {
+  position: relative; /*задаємо цю картинку як дочірню*/
+  flex-grow: 1; /*задаємо мінімальну ширину блоку, щоб header_img img не випадало з контенту*/
+}
+
+/*обираємо картинку НАПРЯМУ для стилізації (!!!НЕ КОНТЕЙНЕР!!!)*/
+.header_img img {
+  position: absolute; /*задаємо цю картинку як батьківську*/
+  top: -181px; /*заганяємо її в верній правий кут (був 0) і регулюємо візуально по макету (став -20px)*/
+  right: -87px; /*заганяємо її в верній правий кут*/
+
+  max-width: unset; /*при ресеті стилів на початку для всіх картинок задався max-width: 100%, але нам його треба скинути до значення unset (не задано)*/
+  width: 894px; /*задаємо розміри, щоб картинка не ужималась*/
+  height: 940px; /*задаємо розміри, щоб картинка не ужималась, висота як header*/
+  pointer-events: none;
+}
+
+.header_img::after {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: -40px;
+  width: 830px;
+  height: 622px;
+  background-image: url(./../img/header/header-elements.svg);
+  pointer-events: none;
+}
+
+/* Nav */
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /*вирівнює все меню по-горизонталі по-центру*/
+  column-gap: 80px; /*відстань між пунктами меню*/
+}
+
+.naw_list {
+  display: flex;
+  column-gap: 80px;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.naw_list a {
+  position: relative; /*вказує що посилання є батьківським*/
+}
+
+/* вказує на візуальне оформлення активного посилання в меню (в header і hover) */
+.naw_list a.active::after,
+.naw_list a:hover::after {
+  content: "";
+
+  position: absolute; /*буде розміщений відносно цього ж батьківського посилання*/
+  left: 0; /*відступ блоку зліва відносно посилання*/
+  right: 10px; /*відступ блоку праворуч відносно посилання, тобто не буде доходити на 10px до края посилання*/
+  bottom: -6px; /*посуне блок на 6px вниз від посилання*/
+  display: block;
+  height: 4px; /*висота блоку (ширину не вказуємо, бо вона автоматично регулюється відносно вказаних нами вище країв)*/
+  background-color: #c4c4c4;
+  border-radius: 50px;
+}
+
+/* naw_list naw_list--footer прибираємо візуальне оформлення активного посилання в меню (в footer і hover) */
+.naw_list.naw_list--footer a.active::after,
+.naw_list.naw_list--footer a:hover::after {
+  display: none;
+}
+
+/* додаємо візуальне оформлення активного посилання на помаранчевий колір (в footer) */
+.naw_list.naw_list--footer a.active,
+.naw_list.naw_list--footer a:hover {
+  color: var(--orange);
+}
+
+.naw_login {
+  display: flex;
+  column-gap: 25px; /*відстань між блоками*/
+  align-items: center; /*вирівнює по-горизонталі по-центру*/
+  font-style: normal;
+  font-weight: 500;
+  font-size: 15px;
+}
+
+/* Logo */
+
+.logo {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 20px;
+  color: #ffffff;
+}
+
+.logo a {
+  color: inherit !important; /*inherit вказує що посилання повинні бути того ж кольору, який вказаний в класі .logo */
+}
+
+/* робимо модифікатор на зміну кольору лого в футері, не змінюючи структури */
+.logo--footer {
+  color: var(--orange);
+}
+
+/* скриваємо кнопку меню адаптиву */
+.nav_toggle {
+  display: none;
+}
+
+/* скриваємо кнопку меню адаптиву footer */
+.nav_toggle_footer {
+  display: none;
+}
+
+/* Header-Content */
+
+.header_badge {
+  display: inline-block; /*формує блок розміром з його вмістом (текстом і т.п.)*/
+  margin-bottom: 7px; /*відступ від низа блока до наступного блока*/
+  font-weight: 500;
+  font-size: 18px;
+  padding: 11px 30px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 15px;
+}
+
+.header_title {
+  font-weight: 400;
+  font-size: 55px;
+  line-height: 82px;
+  margin-bottom: 30px;
+}
+
+.header_text {
+  max-width: 519px;
+  margin-bottom: 68px;
+  font-weight: 700;
+  font-size: 25px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* DESTINATIONS */
+
+.destinations {
+  overflow-x: hidden; /* позбуваємость горизонтального слайдера (ось Х), при зменшенні вікна */
+}
+
+.destinations_row {
+  display: flex; /* ставимо в ряд блоки .destinations_content та .destinations_slider */
+  column-gap: 50px; /* задаємо відстань між ними */
+  margin: 96px 0 100px;
+}
+.destinations_content {
+  max-width: 456px; /* обмежуємо ширину блока контенту */
+}
+
+.destinations_slider {
+  width: 1110px; /* задаємо ширину слайдера */
+  flex-shrink: 0; /* робимо щоб слайдер всередині флекс-боксу, при зменшенні вікна, не зменшувався, але з'явиться горизональний слайдер. Від нього ми позбавляємось за допомогою "overflow-x: hidden" у властивостях головного блоку ".destinations" */
+}
+
+.destinations_title {
+  font-weight: 600;
+  font-size: 55px;
+  margin-bottom: 15px;
+}
+
+.destinations_title span {
+  font-size: 30px;
+}
+
+.destinations_text {
+  margin-bottom: 60px;
+  font-weight: 500;
+  font-size: 25px;
+  color: var(
+    --secondary
+  ); /* задаємо колір за допомогою змінної, яку задали на початку */
+}
+
+/* SLIDER */
+
+.slider {
+  position: relative;
+  height: 456px;
+}
+
+.slider_item {
+  margin-top: 25px; /*задаємо відступ зверху до зображення, щоб вирівняти його по-центру по-гориз.*/
+  width: 335px;
+  height: 402px;
+  object-fit: cover; /*зображення буде займати всю площину блока, без порушення пропорцій*/
+  border-radius: 35px; /*додаємо скруглення кутів*/
+  transition: 0.2s ease-in; /*додаємо плавність зміни розміру картинці*/
+}
+
+.slider .center .slider_item {
+  margin-top: 0; /*прибираємо відступ зверху до зображення, щоб він не наслідував від батьківського, для вирівн. по гориз.*/
+  width: 380px;
+  height: 456px;
+}
+
+.slider_btn {
+  /* малюємо кнопку */
+  display: block;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: linear-gradient(129.54deg, #ff7b4e 15.57%, #ff584e 95.03%),
+    #8b8b8b;
+  /* розміщаємо в кнопці стрілку */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* розміщаємо кнопку відносно зображень */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.slider_btn--prew {
+  padding-left: 26px;
+  justify-content: flex-start;
+  /* розміщаємо кнопку відносно зображень */
+  left: -27px;
+}
+
+.slider_btn--next {
+  padding-right: 26px;
+  justify-content: flex-end;
+  /* розміщаємо кнопку відносно зображень */
+  right: -27px;
+}
+
+/* CUSTOMERS */
+
+.customers {
+  margin: 10px;
+}
+
+.customers_row {
+  display: flex;
+  column-gap: 68px; /*задаємо відступ між блоками в ряду*/
+  margin: 100px 0 133px;
+}
+.customers_img {
+  min-width: 478px;
+}
+
+.customers_img img {
+  border-radius: 60px;
+}
+
+.customers_title {
+  font-weight: 500;
+  font-size: 45px;
+  margin-bottom: 35px;
+}
+
+/*Review*/
+.review {
+  max-width: 490px;
+}
+
+.review_client {
+  display: flex; /*робимо адаптивний ряд*/
+  align-items: center; /*вирівнюємо блоки аватару і опису по центру горизонталі*/
+  column-gap: 33px; /*з відступом між аватаром і описом*/
+
+  margin-bottom: 60px;
+}
+
+.review_client-avatar {
+  overflow: hidden; /*не дозволяє зображенню виходити за рамки об'єкту*/
+  width: 134px;
+  height: 134px;
+  border-radius: 50%;
+  background-color: #ff794e;
+}
+
+.review_client-desc-name {
+  font-weight: 500;
+  font-size: 33px;
+  margin-bottom: 10px;
+}
+
+.review_client-desc-country {
+  font-weight: 400;
+  font-size: 25px;
+  color: var(--secondary);
+}
+
+.review_text {
+  margin-bottom: 30px;
+  color: var(--secondary);
+  font-weight: 500;
+  font-size: 22px;
+}
+
+/* CTA */
+
+.cta {
+  padding: 100px; /*одне значення означає відступ зверху і знизу по 100px*/
+}
+
+.cta_plate {
+  position: relative;
+  display: flex;
+  flex-direction: column; /*виставляємо контент в стовбчик*/
+  align-items: center; /*в стовбчику вирівнюємо контент по центру відносно один-одного*/
+  justify-content: center; /*вирівнюємо весь контент в блоці по вертикальному центру*/
+  padding: 40px 15px;
+  min-height: 581px;
+  border-radius: 60px;
+  background-color: #fff;
+}
+
+.cta_plate::before,
+.cta_plate::after {
+  position: absolute;
+  width: 63px;
+  height: 83px;
+  content: "";
+}
+
+.cta_plate::before {
+  left: 74px;
+  bottom: 56px;
+  background-image: url("./../img/cta/cta-el-01.svg");
+}
+
+.cta_plate::after {
+  right: 80px;
+  top: 74px;
+  background-image: url("./../img/cta/cta-el-01.svg");
+}
+
+.cta-title {
+  margin-bottom: 30px;
+  font-weight: 500;
+  font-size: 45px;
+  text-align: center;
+}
+.cta_text {
+  margin-bottom: 60px;
+  font-weight: 400;
+  font-size: 30px;
+  color: var(--secondary);
+}
+
+/* SUBSCRIBE */
+
+.subscribe {
+  margin: 35px 0 50px;
+}
+
+.subscribe_content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.subscribe_title {
+  font-weight: 600;
+  font-size: 55px;
+  max-width: 494px;
+  margin-bottom: 60px;
+}
+
+/* Subscribe form */
+.subscribe-form {
+  display: flex;
+  column-gap: 191px;
+  padding: 12px 15px 12px 46px;
+  border-radius: 35px;
+  background: #fff;
+}
+
+.subscribe-form_input {
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--secondary);
+}
+
+.subscribe-form_input::placeholder {
+  color: var(
+    --secondary
+  ); /*даємо прозорість тексту, оскільки placeholder не приймає на себе властивості батьківського тегу*/
+}
+
+/* FOOTER */
+
+.nav_footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /*вирівнює все меню по-горизонталі по-центру*/
+  column-gap: 80px; /*відстань між пунктами меню*/
+}
+
+.footer {
+  margin: 56px 0 74px;
+}
+
+.footer a {
+  color: var(--secondary);
+}
+
+/* BUTTONS */
+
+/* Buttons main */
+.btn {
+  display: inline-block;
+  font-weight: 600;
+  font-size: 20px;
+  color: #ffffff !important;
+  padding: 25px 45px;
+  background: linear-gradient(129.54deg, #ff7b4e 15.57%, #ff584e 95.03%);
+  border-radius: 27px;
+}
+
+.btn:hover {
+  color: #fddede !important;
+  transition: color 0.2s ease-in; /*ефекти плавної зміни кольору*/
+}
+
+.btn:active {
+  position: relative;
+  top: 1px;
+}
+
+.btn--login {
+  padding: 13px 44px;
+  font-weight: 500;
+  font-size: 15px;
+  border-radius: 100px;
+}
+
+.btn--header {
+  font-size: 25px;
+  color: #fefefe;
+  padding: 27px 48px;
+}
+
+.btn--subscribe {
+  font-size: 25px;
+  padding: 34px 87px;
+  border-radius: 35px;
+}
+
+/* Прописуємо адаптивність */
+
+/* СSS-код кнопки адаптивного меню */
+
+.menu-icon-wrapper {
+  /* Присвоїмо змінні щоб кнопка була універсальною */
+  --time: 0.1ms;
+  --width: 40px;
+  --height: 30px;
+  --line-height: 4px;
+  --color: #ffffff;
+
+  width: var(--width);
+  height: var(--height);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu-icon {
+  position: relative;
+  width: var(--width);
+  height: var(--line-height);
+  background-color: var(--color);
+}
+
+.menu-icon::before,
+.menu-icon::after {
+  display: block;
+  position: absolute;
+  left: 0;
+  content: "";
+  width: var(--width);
+  height: var(--line-height);
+  background-color: var(--color);
+  transition: transform var(--time) ease-in, top var(--time) linear var(--time);
+}
+
+.menu-icon::before {
+  top: calc(var(--line-height) * -2.5);
+}
+
+.menu-icon::after {
+  top: calc(var(--line-height) * 2.5);
+}
+
+.menu-icon--active {
+  background-color: transparent;
+}
+
+.menu-icon--active::before,
+.menu-icon--active::after {
+  top: 0;
+  transition: top var(--time) linear, transform var(--time) ease-in var(--time);
+}
+
+.menu-icon--active::before {
+  transform: rotate(-45deg);
+}
+
+.menu-icon--active::after {
+  transform: rotate(45deg);
+}
+
+/* MEDIA */
+
+@media (max-width: 1269px) {
+  /* Destinations */
+  .container-right {
+    padding-left: 15px;
+  }
+
+  .destinations_slider {
+    width: 880px;
+  }
+
+  /* Cta */
+  .cta {
+    padding: 50px 80px;
+  }
+}
+
+@media (max-width: 1000px) {
+  /* Header */
+  .naw_list--header {
+    display: none; /*скриваємо звичайне меню*/
+  }
+
+  .naw_login--header {
+    display: none; /*скриваємо звичайне меню авторизації*/
+  }
+
+  .nav_toggle {
+    display: block; /*показуємо кнопку адаптивного меню*/
+  }
+
+  .nav--mobile {
+    position: fixed;
+    flex-direction: column; /*відображення flex змінеться на column (вертикальне)*/
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 99;
+    background: linear-gradient(210deg, #428e5f -17.38%, #112120 78.4%), #204434;
+    background-size: 100%;
+  }
+
+  .nav--mobile .logo {
+    font-size: 34px;
+  }
+
+  .nav--mobile .naw_list {
+    /*коли у нас батьківський є nav--mobile, то ми звертаємось до .naw_list і він відображатиметься*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+
+    font-size: 22px;
+  }
+
+  .nav--mobile .naw_list a.active::after,
+  .naw_list a:hover::after {
+    display: none;
+  }
+
+  .nav--mobile .naw_login {
+    /*той самий принцип, що і вище */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 40px;
+
+    font-size: 22px;
+  }
+
+  /* розміщаємо кнопку мобільного меню зверху */
+  .nav--mobile .nav_toggle {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+  }
+
+  .header_img img {
+    right: -256px; /*здвигаємо картинку правіше, за існуюче положення*/
+  }
+
+  .header_img::after {
+    right: -200px;
+  }
+
+  /* Destinations */
+  .destinations_row {
+    flex-direction: column;
+    row-gap: 50px;
+    margin: 96px 0 100px 15px;
+  }
+  .container-right {
+    padding-left: 15px;
+  }
+
+  /* Customers */
+  .customers_row {
+    flex-direction: column-reverse;
+    row-gap: 49px;
+    margin: 50px 0 60px 15px;
+  }
+
+  /* Cta */
+  .cta_plate {
+    padding: 15px 15px;
+    min-height: 500px;
+    border-radius: 50px;
+  }
+
+  .cta-title {
+    margin-bottom: 25px;
+    font-size: 40px;
+  }
+
+  .cta_text {
+    margin-bottom: 45px;
+    font-size: 28px;
+  }
+
+  .cta_plate::before {
+    left: 40px;
+    bottom: 40px;
+  }
+
+  .cta_plate::after {
+    right: 40px;
+    top: 40px;
+  }
+
+  /* Subscribe */
+  .subscribe-form {
+    column-gap: 40px;
+    padding: 12px 12px 12px 20px;
+  }
+
+  .btn--subscribe {
+    font-size: 23px;
+    padding: 29px 82px;
+  }
+
+  .subscribe-form_input {
+    font-size: 23px;
+  }
+
+  .subscribe_title {
+    font-size: 50px;
+    margin-bottom: 35px;
+  }
+
+  /* Footer */
+  .naw_list {
+    column-gap: 54px;
+  }
+}
+
+@media (max-width: 850px) {
+  .btn {
+    font-size: 20px;
+    padding: 20px 25px;
+  }
+
+  /* Header */
+  .header {
+    padding-top: 20px;
+    min-height: unset;
+  }
+
+  .header_top {
+    margin-bottom: 60px;
+  }
+
+  .header_row {
+    flex-direction: column;
+  }
+
+  .header_img img {
+    position: static;
+    width: 80%;
+    height: auto;
+  }
+
+  .header_img::after {
+    top: 160px;
+    right: -42px;
+  }
+
+  .header_content {
+    max-width: 500px;
+  }
+
+  .header_title {
+    font-weight: 400;
+    font-size: 35px;
+    line-height: 50px;
+    margin-bottom: 25px;
+  }
+
+  .header_text {
+    max-width: 440px;
+    margin-bottom: 35px;
+    font-size: 22px;
+  }
+
+  .header_badge {
+    font-size: 14px;
+    padding: 9px 15px;
+    margin-bottom: 10px;
+  }
+
+  .btn--header {
+    font-size: 20px;
+    padding: 20px 25px;
+  }
+
+  /* Destinations */
+  .container-right {
+    padding-left: 15px;
+  }
+
+  .destinations_title span {
+    font-size: 28px;
+  }
+
+  .destinations_text {
+    margin-bottom: 50px;
+    font-size: 22px;
+  }
+
+  .destinations_title {
+    font-size: 50px;
+    margin-bottom: 10px;
+  }
+
+  .slider {
+    height: 400px;
+  }
+
+  .slider .center .slider_item {
+    margin-top: 0;
+    width: 283px;
+    height: 400px;
+  }
+
+  .slider_item {
+    margin-top: 20px;
+    height: 360px;
+  }
+
+  /* Cta */
+  .cta {
+    padding: 40px 15px;
+  }
+
+  .cta_plate {
+    padding: 60px 15px;
+    min-height: 380px;
+    border-radius: 45px;
+  }
+
+  .cta-title {
+    margin-bottom: 20px;
+    font-size: 35px;
+  }
+
+  .cta_text {
+    margin-bottom: 42px;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .cta_plate::before,
+  .cta_plate::after {
+    width: 45px;
+    height: 59px;
+    background-size: contain;
+  }
+
+  .cta_plate::before {
+    left: 16px;
+    bottom: 22px;
+  }
+
+  .cta_plate::after {
+    right: 10px;
+    top: 10px;
+  }
+
+  /* Subscribe */
+  .subscribe_title {
+    font-size: 42px;
+    margin-bottom: 21px;
+  }
+
+  .subscribe-form {
+    border-radius: 50px;
+  }
+
+  .subscribe-form_input {
+    font-size: 20px;
+  }
+
+  /* Footer */
+  .naw_login {
+    display: none;
+  }
+
+  .naw_list {
+    padding-right: 15px;
+  }
+}
+
+@media (max-width: 600px) {
+  /* Destinations */
+
+  .slider {
+    height: 400px;
+  }
+
+  .slider .center .slider_item {
+    margin-top: 0;
+    width: 283px;
+    height: 400px;
+  }
+
+  .slider_item {
+    margin-top: 20px;
+    height: 360px;
+  }
+
+  .destinations_slider {
+    width: 700px;
+    align-items: center;
+  }
+
+  .destinations_row {
+    margin: 50px;
+    align-items: center;
+  }
+  .container-right {
+    padding-left: 0px;
+  }
+
+  /* Customers */
+
+  .customers_title {
+    font-size: 40px;
+  }
+
+  .review_client {
+    margin-bottom: 20px;
+  }
+
+  .review_client-avatar {
+    width: 100px;
+    height: 100px;
+  }
+
+  .review_client-desc-name {
+    font-size: 27px;
+    margin-bottom: 3px;
+  }
+
+  .review_client-desc-country {
+    font-size: 20px;
+  }
+
+  .review_text {
+    margin: 25px 10px 15px 0;
+    font-size: 20px;
+  }
+
+  .review_rating {
+    width: 250px;
+    height: auto;
+  }
+
+  .customers_img {
+    min-width: 200px;
+    margin-right: 10px;
+  }
+
+  /* Cta */
+  .cta {
+    padding: 30px 15px;
+  }
+
+  .cta_plate {
+    padding: 68px 15px;
+    min-height: 374px;
+    border-radius: 50px;
+  }
+
+  .cta-title {
+    margin-bottom: 15px;
+    font-size: 34px;
+  }
+
+  .cta_text {
+    margin-bottom: 35px;
+    font-size: 22px;
+  }
+
+  /* Subscribe */
+  .subscribe_title {
+    font-size: 35px;
+    margin-bottom: 18px;
+  }
+
+  .subscribe-form {
+    column-gap: 3px;
+    padding: 12px 13px 12px 15px;
+  }
+
+  /* Footer */
+  .naw_list {
+    column-gap: 25px;
+  }
+
+  .nav_footer {
+    column-gap: 65px;
+  }
+}
+
+@media (max-width: 460px) {
+  /* Header */
+  .nav--mobile .nav_toggle {
+    top: 20px;
+    right: 15px;
+  }
+
+  /* Destinations */
+
+  .slider {
+    height: 350px;
+  }
+
+  .destinations_slider {
+    width: 600px;
+    align-items: center;
+  }
+
+  .destinations_row {
+    margin: 50px;
+    align-items: center;
+  }
+
+  .slider_item {
+    margin-top: 15px; /*задаємо відступ зверху до зображення, щоб вирівняти його по-центру по-гориз.*/
+    margin-right: 15px;
+    width: 200px;
+    height: 320px;
+  }
+
+  .slider .center .slider_item {
+    margin-top: 0; /*прибираємо відступ зверху до зображення, щоб він не наслідував від батьківського, для вирівн. по гориз.*/
+    margin-right: 15px;
+    width: 225px;
+    height: 350px;
+  }
+
+  .container-right {
+    padding-left: 0px;
+  }
+
+  .destinations_title span {
+    font-size: 25px;
+  }
+
+  .destinations_text {
+    margin-bottom: 40px;
+    font-size: 22px;
+  }
+
+  .destinations_title {
+    font-size: 40px;
+    margin-bottom: 5px;
+  }
+
+  /* Customers */
+  .review_client-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  /* Subscribe */
+  .subscribe_title {
+    font-size: 34px;
+    margin-bottom: 16px;
+  }
+
+  .subscribe-form {
+    flex-direction: column;
+    row-gap: 15px;
+    max-width: 341px;
+    padding: 12px 13px 12px 15px;
+  }
+
+  .subscribe-form_input {
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+  }
+
+  /* Footer */
+  .nav_footer {
+    flex-direction: column-reverse;
+    row-gap: 20px;
+    align-items: center;
+  }
+}
+
+@media (max-width: 340px) {
+  .btn--header {
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+
+  .btn {
+    font-size: 16px;
+    padding: 15px 20px;
+    border-radius: 20px;
+  }
+
+  /* Destinations */
+  .destinations_row {
+    margin: 25px 15px;
+  }
+
+  .header_text {
+    max-width: 250px;
+    margin-bottom: 30px;
+    font-size: 15px;
+  }
+
+  .destinations_title span {
+    font-size: 20px;
+  }
+
+  .destinations_text {
+    margin-bottom: 35px;
+    font-size: 15px;
+  }
+
+  .destinations_title {
+    font-size: 35px;
+    margin-bottom: 3px;
+  }
+
+  /* Customers */
+  .review_client {
+    column-gap: 15px;
+  }
+
+  .review_client-avatar {
+    width: 50px;
+    height: 50px;
+  }
+
+  .customers_title {
+    font-size: 35px;
+    margin-bottom: 14px;
+  }
+
+  .review_client-desc-name {
+    font-size: 20px;
+    margin-bottom: 1px;
+  }
+
+  .review_client-desc-country {
+    font-size: 16px;
+  }
+
+  .review_rating {
+    max-width: 210px;
+    height: auto;
+  }
+
+  /* Cta */
+  .cta-title {
+    margin-bottom: 12px;
+    font-size: 26px;
+  }
+
+  .cta_text {
+    margin-bottom: 25px;
+    font-size: 19px;
+  }
+
+  /* Subscribe */
+  .subscribe_title {
+    font-size: 26px;
+    margin-bottom: 10px;
+  }
+
+  .subscribe-form {
+    max-width: 250px;
+    padding: 10px 25px;
+    border-radius: 30px;
+  }
+
+  .subscribe-form_input {
+    font-size: 16px;
+  }
+
+  /* Footer */
+  .naw_list {
+    padding-right: 0;
+  }
+
+  .naw_list {
+    flex-direction: column;
+    row-gap: 10px;
+    align-items: center;
+  }
+}
+
+/* прибираємо вертикальний скрол при натисканні на кнопку мобільного меню */
+.no-scrol {
+  overflow-y: hidden;
+}
